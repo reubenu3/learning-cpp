@@ -1,6 +1,6 @@
 //
 //  matrix.h
-//  
+//
 //
 //  Created by Reuben Urias on 8/29/18.
 //
@@ -9,25 +9,31 @@
 
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 class Matrix {
 private:
-    int num_of_rows;
-    int num_of_cols;
+    int _nrows;
+    int _ncols;
     std::vector<int> matrix;
+    std::string matrix_vals;
+    
 public:
+    Matrix();
     Matrix(int rows, int cols);
     Matrix(int rows, int cols, std::vector<int> matrix_vals);
     Matrix(const Matrix &source);
     ~Matrix();
     
     // operator overload --> + - *(num) *(matrix) << >> [] ^
+    friend std::ostream &operator<<(std::ostream &os, const Matrix &rhs);
+    friend std::istream &operator>>(std::istream &in, Matrix &rhs);
     Matrix operator+(const Matrix &rhs) const;
+    Matrix operator*(int n) const;
     
-    void display();
+    void create_matrix(const std::string &mvals);
     int get_num_rows();
     int get_num_cols();
-    void show_dimensions();
     
 };
 
@@ -37,10 +43,8 @@ public:
 /** TODO
  
  - templatize class
- - dynamic row/col size
  - add boundary checks in methods
  - negate, subtract, scale, multiply, divide, transpose methods
- - pretty print method
  - gemm/gemv
  - display take  a stream input
  -opencl/metal
