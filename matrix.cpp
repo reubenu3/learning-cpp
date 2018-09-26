@@ -37,10 +37,10 @@ Matrix::Matrix()
     }
     
     // Overload [] operator
-    //    int &operator[](int index) {
-    //        return matrix[index];
-    //    }
-    //
+    int &Matrix::operator[](int index) {
+        return matrix[index];
+    }
+    
     
     // Overload insertion operator
     std::ostream &operator<<(std::ostream &os, const Matrix &rhs) {
@@ -121,6 +121,23 @@ Matrix::Matrix()
         
         return temp;
     }
+    
+    
+    // Transpose
+    Matrix Matrix::transpose() const {
+        std::vector<int> temp_vec;
+        
+        for(size_t i=0; i<(*this)._ncols; ++i) {
+            for(size_t j=0; j<(*this)._nrows; ++j) {
+                temp_vec.push_back((*this).matrix[(j * (*this)._ncols) + i]);
+            }
+        }
+        
+        Matrix temp((*this)._ncols, (*this)._nrows, temp_vec);
+        
+        return temp;
+    }
+    
     
     // create matrix
     void Matrix::create_matrix(const std::string &mvals) {

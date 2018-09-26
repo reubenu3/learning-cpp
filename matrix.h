@@ -28,12 +28,12 @@ public:
     // operator overload --> - *(matrix) [] ^
     friend std::ostream &operator<<(std::ostream &os, const Matrix &rhs);
     friend std::istream &operator>>(std::istream &in, Matrix &rhs);
-    //    int &operator[](unsigned int index);
-    
-    
+    int &operator[](int index);
     Matrix operator+(const Matrix &rhs) const;
     Matrix operator*(int n) const;
     Matrix operator^(const Matrix &rhs) const;
+    Matrix transpose() const;
+    
     
     void create_matrix(const std::string &mvals);
     int get_num_rows();

@@ -32,10 +32,16 @@ int main() {
     //    std::cout << matrix4;
     
     // dot product
+    //    Matrix matrix1(2, 3, {1, 2, 3, 4, 5, 6});
+    //    Matrix matrix2(3, 2, {1, 2, 3, 4, 5, 6});
+    //    Matrix matrix3 = matrix1 ^ matrix2;
+    //    std::cout << matrix3;
+    
+    // transpose
     Matrix matrix1(2, 3, {1, 2, 3, 4, 5, 6});
-    Matrix matrix2(3, 2, {1, 2, 3, 4, 5, 6});
-    Matrix matrix3 = matrix1 ^ matrix2;
-    std::cout << matrix3;
+    std::cout << matrix1 << std::endl;
+    Matrix matrix2 = matrix1.transpose();
+    std::cout << matrix2 << std::endl;
     
     return 0;
 }
