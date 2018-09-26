@@ -25,11 +25,15 @@ public:
     Matrix(const Matrix &source);
     ~Matrix();
     
-    // operator overload --> + - *(num) *(matrix) << >> [] ^
+    // operator overload --> - *(matrix) [] ^
     friend std::ostream &operator<<(std::ostream &os, const Matrix &rhs);
     friend std::istream &operator>>(std::istream &in, Matrix &rhs);
+    //    int &operator[](unsigned int index);
+    
+    
     Matrix operator+(const Matrix &rhs) const;
     Matrix operator*(int n) const;
+    Matrix operator^(const Matrix &rhs) const;
     
     void create_matrix(const std::string &mvals);
     int get_num_rows();
@@ -44,7 +48,7 @@ public:
  
  - templatize class
  - add boundary checks in methods
- - negate, subtract, scale, multiply, divide, transpose methods
+ - negate, subtract, multiply, divide, transpose methods
  - gemm/gemv
  - display take  a stream input
  -opencl/metal

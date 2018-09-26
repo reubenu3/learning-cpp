@@ -15,7 +15,7 @@ Matrix::Matrix()
     
     // Overloaded constructor
     Matrix::Matrix(int rows, int cols)
-    : _nrows{rows}, _ncols{cols} {
+    : _nrows{rows}, _ncols{cols}, matrix(rows * cols, 0) {
         std::cout << "2-arg constructor called for class Matrix.\n";
     }
     
@@ -35,6 +35,12 @@ Matrix::Matrix()
     Matrix::~Matrix() {
         std::cout << "Destructor called for class Matrix\n";
     }
+    
+    // Overload [] operator
+    //    int &operator[](int index) {
+    //        return matrix[index];
+    //    }
+    //
     
     // Overload insertion operator
     std::ostream &operator<<(std::ostream &os, const Matrix &rhs) {
@@ -89,6 +95,30 @@ Matrix::Matrix()
         for(size_t i=0; i<temp.matrix.size(); ++i) {
             temp.matrix[i] *= n;
         }
+        return temp;
+    }
+    
+    // Dot product
+    Matrix Matrix::operator^(const Matrix &rhs) const {
+        // check dimensions
+        if(_ncols != rhs._nrows) {
+            throw "Dimension mismatch!";
+        }
+        
+        // proceed with dot product
+        Matrix temp(_nrows, rhs._ncols);
+        int temp_sum{0};
+        
+        for(size_t orow=0; orow < _nrows; ++orow) {
+            for(size_t ocol=0; ocol < rhs._ncols; ++ocol) {
+                for(size_t irow=0; irow < rhs._nrows; ++irow) {
+                    temp_sum += (*this).matrix[(orow * _ncols) + irow] * rhs.matrix[(irow * rhs._ncols) + ocol];
+                }
+                temp.matrix[(orow * rhs._ncols) + ocol]  = temp_sum;
+                temp_sum = 0;
+            }
+        }
+        
         return temp;
     }
     
